@@ -15,7 +15,7 @@
     background-color: #0a2a4a;
     min-height: 100vh;
   }
-  .page-wrapper { max-width: 900px; margin: 0 auto; }
+  .page-wrapper { width: 900px; margin: 0 auto; }
 
   /* Top user info bar */
   .top-bar {
@@ -191,31 +191,19 @@
   }
   .footer a { color: #c00; text-decoration: none; }
 
-  @media (max-width: 420px) {
-    body { font-size: 12px; }
-    .page-wrapper { max-width: 380px; padding: 0 8px; }
-    .header img { height: 70px; }
-    .nav-bar a { padding: 6px 10px; font-size: 12px; }
-    /* keep two-column positions but scale sizes to fit phone width */
-    .main-content { gap: 10px; padding: 12px; }
-    fieldset.student-brief {
-      width: 40%;
-      min-width: 0;
-      padding: 8px 10px 8px;
-    }
-    .student-photo { width: 60px; height: 72px; }
-    .info-table td { padding: 4px 6px; font-size: 11px; }
-    .links-list { margin-left: 48px; font-size: 11px; }
-    .btn-small { margin-left: 48px; padding: 3px 8px; font-size: 11px; }
-    .welcome-section { min-width: 54%; padding-top: 8px; }
-    .welcome-title { font-size: 16px; }
-    .student-name { font-size: 13px; }
-    .session-info { font-size: 12px; }
-    .icons-row { gap: 6px; }
-    .icon-item { width: 64px; }
-    .icon-item img { width: 48px; height: 48px; }
-    .livechat-wrap img { max-width: 120px; }
-    .user-info-box { font-size: 11px; padding: 4px 8px; }
+  /* Keep layout fixed: scale the whole page-wrapper to fit viewport while preserving positions */
+  :root {
+    --design-width: 900px;
+    --scale: calc(100vw / var(--design-width));
+    --scale-clamped: min(1, var(--scale));
+  }
+  html, body { width: 100%; }
+  body { overflow-x: hidden; }
+  .page-wrapper {
+    width: var(--design-width);
+    transform-origin: top center;
+    transform: scale(var(--scale-clamped));
+    margin: 0 auto;
   }
 </style>
 </head>
