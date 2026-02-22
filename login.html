@@ -16,7 +16,7 @@
     min-height: 100vh;
   }
   .page-wrapper {
-    max-width: 960px;
+    width: 960px;
     margin: 0 auto;
   }
   .header {
@@ -158,36 +158,19 @@
     gap: 4px;
   }
   .footer a { color: #c00; text-decoration: none; }
-  @media (max-width: 420px) {
-    body { font-size: 12px; }
-    .header img { height: 80px; }
-    .nav-bar { padding: 4px 0; }
-    .nav-bar a { padding: 4px 8px; font-size: 12px; }
-    .banner { height: auto; }
-    .content-box {
-      padding: 14px 12px;
-      gap: 12px;
-      box-shadow: none;
-    }
-    .left-col {
-      flex: 0 1 62%;
-      min-width: 0;
-    }
-    .left-col h3 { font-size: 14px; }
-    .left-col ol, .left-col p { font-size: 13px; }
-    .right-col {
-      flex: 0 0 36%;
-      min-width: 0;
-      padding: 8px 10px;
-      border-radius: 3px;
-    }
-    .right-top { height: 6px; margin: -8px -10px 8px -10px; }
-    .right-col h2 { font-size: 14px; margin-bottom: 10px; }
-    .form-row label { width: 100px; font-size: 12px; padding-right: 6px; }
-    .form-row input { padding: 6px; font-size: 13px; }
-    .signin-btn { padding: 4px 12px; font-size: 13px; }
-    .right-form { max-width: 240px; }
-    .livechat-btn img { max-width: 120px; }
+  /* Keep layout fixed: scale the whole page-wrapper to fit viewport while preserving positions */
+  :root {
+    --design-width-login: 960px;
+    --scale-login: calc(100vw / var(--design-width-login));
+    --scale-login-clamped: min(1, var(--scale-login));
+  }
+  html, body { width: 100%; }
+  body { overflow-x: hidden; }
+  .page-wrapper {
+    width: var(--design-width-login);
+    transform-origin: top center;
+    transform: scale(var(--scale-login-clamped));
+    margin: 0 auto;
   }
 </style>
 </head>
