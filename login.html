@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redeemer's University - Student Portal Login</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    background-image: url('imgi_11_bg.png');
+    background-repeat: repeat;
+    background-size: 100px auto;
+    background-color: #0a2a4a;
+    min-height: 100vh;
+  }
+  .page-wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .header {
+    padding: 10px 10px;
+    display: flex;
+    align-items: center;
+  }
+  .header img {
+    height: 150px;
+    max-width: 100%;
+  }
+  .nav-bar {
+    background: linear-gradient(to bottom, #2C7EB7, #1A589E);
+    padding: 6px 0;
+    font-family: Arial, sans-serif;
+  }
+  .nav-bar a {
+    display: inline-block;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 6px 12px;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+  }
+
+  .banner {
+    width: 100%;
+    display: block;
+  }
+  .content-box {
+    background: white;
+    border-radius: 10px;
+    margin: 20px auto;
+    width: 100%;
+    padding: 32px 28px;
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    justify-content: space-between;
+    box-shadow: 0 0 0 4px rgba(26,90,154,0.05);
+    box-sizing: border-box;
+  }
+  .left-col {
+    flex: 0 1 56%;
+    min-width: 220px;
+  }
+  .left-col h3 {
+    color: #1a6aaa;
+    font-size: 15px;
+    margin-bottom: 8px;
+    margin-top: 16px;
+  }
+  .left-col h3:first-child { margin-top: 0; }
+  .left-col ol, .left-col ul {
+    padding-left: 22px;
+    color: #333;
+    line-height: 1.7;
+  }
+  .left-col p {
+    color: #333;
+    line-height: 1.7;
+    padding-left: 10px;
+  }
+  .right-col {
+    flex: 0 0 36%;
+    min-width: 260px;
+    border: 1px solid #ccc;
+    padding: 12px 16px;
+    border-radius: 4px;
+    background: #f7f7f7;
+  }
+  .right-col h2 {
+    color: #1a6aaa;
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 14px;
+  }
+  .error-box {
+    background: #f08080;
+    border: 1px solid #c00;
+    padding: 10px;
+    margin-bottom: 12px;
+    min-height: 36px;
+    border-radius: 2px;
+  }
+  .form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  .form-row label {
+    width: 130px;
+    text-align: right;
+    padding-right: 8px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+  }
+  .form-row input {
+    flex: 1;
+    min-width: 100px;
+    padding: 4px 6px;
+    border: 1px solid #aaa;
+    font-size: 13px;
+    background: #f0e8e8;
+  }
+  .form-row input[type=password] { background: #e8e8f0; }
+  .signin-row {
+    text-align: right;
+    margin-bottom: 10px;
+  }
+  .signin-btn {
+    background: #eee;
+    border: 1px solid #999;
+    padding: 4px 18px;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  .signin-btn:hover { background: #ddd; }
+  .links-section {
+    font-size: 12px;
+    color: #333;
+    line-height: 2;
+  }
+  .links-section a {  text-decoration: none; }
+  .livechat-btn { display: block; margin-top: 8px; cursor: pointer; }
+  .livechat-btn img { width: 100%; max-width: 160px; display: block; margin: 0 auto; }
+  .footer {
+    background: #666666;
+    color: #333;
+    font-size: 12px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .footer a { color: #c00; text-decoration: none; }
+  @media (max-width: 420px) {
+    body { font-size: 12px; }
+    .header img { height: 80px; }
+    .nav-bar { padding: 4px 0; }
+    .nav-bar a { padding: 4px 8px; font-size: 12px; }
+    .banner { height: auto; }
+    .content-box {
+      padding: 14px 12px;
+      gap: 12px;
+      box-shadow: none;
+    }
+    .left-col {
+      flex: 0 1 62%;
+      min-width: 0;
+    }
+    .left-col h3 { font-size: 14px; }
+    .left-col ol, .left-col p { font-size: 13px; }
+    .right-col {
+      flex: 0 0 36%;
+      min-width: 0;
+      padding: 8px 10px;
+      border-radius: 3px;
+    }
+    .right-top { height: 6px; margin: -8px -10px 8px -10px; }
+    .right-col h2 { font-size: 14px; margin-bottom: 10px; }
+    .form-row label { width: 100px; font-size: 12px; padding-right: 6px; }
+    .form-row input { padding: 6px; font-size: 13px; }
+    .signin-btn { padding: 4px 12px; font-size: 13px; }
+    .right-form { max-width: 240px; }
+    .livechat-btn img { max-width: 120px; }
+  }
+</style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <div class="header">
+        <img src="imgi_1_logo-Photoroom.png" alt="Upload Signature">   
+    </div>
+    <div class="nav-bar">
+      <a href="#" class="active">HOME</a>
+    </div>
+    <img src="imgi_2_banner.jpg" alt="Banner" class="banner">
+    <div class="content-box">
+      <div class="left-col">
+        <h3>To Login, do the following?</h3>
+        <ol>
+          <li>If you are a new student, enter your JAMB Registration number in place of matric number.</li>
+          <li>If you are a returning student, enter your matriculation number.</li>
+          <li>Enter your password</li>
+          <li>Click the <strong>Sign In</strong> button.</li>
+        </ol>
+        <h3>Have you forgotten your password?</h3>
+        <ol>
+          <li>Simply click on the Forgotten Password link on the Sign In form.</li>
+        </ol>
+        <h3>You need help ?</h3>
+        <ol>
+          <li>Click here to contact support and submit a ticket</a></li>
+        </ol>
+        <h3>You need payment-related help ?</h3>
+        <p>
+          Email: studentaccount@run.edu.ng<br>
+          Or<br>
+          Call - 0913-534-9800<br>
+          <strong>Note: (open from 08:00am to 06:00pm - Mondays to Fridays)</strong>
+        </p>
+      </div>
+      <div class="right-col">
+        <h2>Student Log-In</h2>
+        <div class="error-box" id="errorBox"></div>
+        <div class="form-row">
+          <label>Jamb No/Matric No</label>
+          <input type="text" id="matric" value="RUN/CVE/21/10298">
+        </div>
+        <div class="form-row">
+          <label>Password</label>
+          <input type="password" id="password" value="">
+        </div>
+        <div class="signin-row">
+          <button class="signin-btn" onclick="doLogin()">Sign in</button>
+        </div>
+        <div class="links-section">
+          Forgotten password? <a href="#">Reset</a><br>
+          Need the Curriculum ? <a href="#">Click to view</a><br>
+          Need the Time Table ? <a href="#">Click to view</a><br>
+          Need the class register ? <a href="#">Click here</a><br>
+          Portal Admin? <a href="#">Click here</a>
+        </div>
+        <div class="livechat-btn">
+          <img src="data:image/jpeg;base64,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" alt="Live Chat">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <span>@162.214.155.50</span>
+    <span>Copyright &copy; 2012 <a href="#">Redeemer's University</a>. All Rights Reserved.</span>
+  </div>
+  <script>
+    function doLogin() {
+      window.location.href = 'dashboard.html';
+    }
+  </script>
+</body>
+</html>

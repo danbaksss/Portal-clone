@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redeemer's University - Student Portal</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    background-image: url('imgi_11_bg.png');
+    background-repeat: repeat;
+    background-size: 100px auto;
+    background-color: #0a2a4a;
+    min-height: 100vh;
+  }
+  .page-wrapper { max-width: 900px; margin: 0 auto; }
+
+  /* Top user info bar */
+  .top-bar {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0;
+  }
+  .user-info-box {
+    background: linear-gradient(to bottom, #2C7EB7, #1A589E);
+    color: white;
+    font-size: 12px;
+    padding: 6px 14px;
+    line-height: 2;
+    text-align: right;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    position: fixed;
+
+  }
+  .user-info-box .label { color: white; font-weight: bold;}
+  .user-info-box .value { color: white;  margin-left: 6px; }
+
+  .header {
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+  }
+  .header img { height: 150px; max-width: 100%; }
+
+  .nav-bar { background: linear-gradient(to bottom, #2C7EB7, #1A589E); padding: 0; }
+  .nav-bar a {
+    display: inline-block;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 8px 18px;
+    text-decoration: none;
+  }
+  .nav-bar a:hover { background: #155a80; }
+
+  /* Icons row */
+  .icons-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 16px 10px;
+  }
+  .icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 105px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .icon-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    background: transparent;
+    mix-blend-mode: normal;
+  }
+  .icon-item span {
+    color: white;
+    font-size: 11px;
+    text-align: center;
+    margin-top: 6px;
+  }
+
+  /* Main content */
+  .main-content {
+    background: white;
+    border-radius: 4px;
+    margin: 0 0 20px 0;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  /* Student brief fieldset */
+  fieldset.student-brief {
+    border: 1px solid #999;
+    padding: 12px 16px 12px;
+    border-radius: 2px;
+    width: 260px;
+    min-width: 220px;
+  }
+  fieldset.student-brief legend {
+    font-size: 13px;
+    font-weight: bold;
+    padding: 0 4px;
+    color: #333;
+  }
+  .change-pic {
+    font-size: 11px;
+    color: #1155cc;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 4px;
+    text-align: center;
+  }
+  .student-photo {
+    width: 100px;
+    height: 120px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 10px auto;
+    border: 1px solid #999;
+  }
+  .info-table { width: 100%; font-size: 12px; border-collapse: collapse; }
+  .info-table td { padding: 6px 8px; vertical-align: top; }
+  .info-table td:first-child { font-weight: bold; color: #333;  }
+  .oust-fees-msg { color: red; font-size: 11px; line-height: 1.5; font-weight: bold; }
+  .oust-fees-msg .oust-fees-amount { font-weight: normal; display: inline-block; margin-top: 4px; }
+  .links-list { margin-left: 96px;margin-top: 10px; font-size: 12px;font-weight: bold; }
+  .links-list a { display: block; color: #101010; text-decoration: none; line-height: 2; }
+  .btn-small {
+    background: #f0f0f0;
+    border: 1px solid #999;
+    padding: 3px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-left: 96px;
+    margin-top: 6px;
+    border-radius: 2px;
+  }
+  .room-alloc { margin-top: 10px; }
+  .room-alloc a { color: #cc0000; font-size: 12px; font-weight: bold; text-decoration: none; cursor: pointer; }
+  .room-alloc-popup {
+    display: none;
+    font-size: 12px;
+    color: #333;
+    font-weight: bold;
+    margin-top: 4px;
+  }
+  .livechat-wrap { margin-top: 10px; }
+  .livechat-wrap img { width: 100%; max-width: 160px; cursor: pointer; display: block; margin: 0 auto; }
+
+  /* Welcome section */
+  .welcome-section {
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+    padding-top: 20px;
+  }
+  .welcome-title { color: #1a6aaa; font-size: 18px; font-weight: bold; margin-bottom: 10px; }
+  .student-name { color: red; font-size: 15px; font-weight: bold; margin-bottom: 10px; }
+  .session-info { color: #1a6aaa; font-size: 14px; margin-bottom: 8px; }
+  .session-info span { color: red; font-weight: bold; }
+  .exam-btn {
+    background: #f0f0f0;
+    border: 1px solid #999;
+    padding: 5px 14px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 2px;
+  }
+  .exam-btn:hover { background: #e0e0e0; }
+
+  /* Footer */
+  .footer {
+    background: #666666;
+    color: #333;
+    font-size: 12px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .footer a { color: #c00; text-decoration: none; }
+
+  @media (max-width: 420px) {
+    body { font-size: 12px; }
+    .page-wrapper { max-width: 380px; padding: 0 8px; }
+    .header img { height: 70px; }
+    .nav-bar a { padding: 6px 10px; font-size: 12px; }
+    /* keep two-column positions but scale sizes to fit phone width */
+    .main-content { gap: 10px; padding: 12px; }
+    fieldset.student-brief {
+      width: 40%;
+      min-width: 0;
+      padding: 8px 10px 8px;
+    }
+    .student-photo { width: 60px; height: 72px; }
+    .info-table td { padding: 4px 6px; font-size: 11px; }
+    .links-list { margin-left: 48px; font-size: 11px; }
+    .btn-small { margin-left: 48px; padding: 3px 8px; font-size: 11px; }
+    .welcome-section { min-width: 54%; padding-top: 8px; }
+    .welcome-title { font-size: 16px; }
+    .student-name { font-size: 13px; }
+    .session-info { font-size: 12px; }
+    .icons-row { gap: 6px; }
+    .icon-item { width: 64px; }
+    .icon-item img { width: 48px; height: 48px; }
+    .livechat-wrap img { max-width: 120px; }
+    .user-info-box { font-size: 11px; padding: 4px 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="page-wrapper">
+  <div class="top-bar">
+    <div class="user-info-box">
+      <span class="label">Current User:</span><span class="value">BAKARE DAVID</span><br>
+      <span class="label">Session:</span><span class="value">2025/2026</span><br>
+      <span class="label">Semester:</span><span class="value">First</span>
+    </div>
+  </div>
+
+  <div class="header">
+    <img src="imgi_1_logo.png" alt="Redeemer's University Logo">
+    <a href="login.html">LOGOUT</a>
+  </div>
+
+  <div class="nav-bar">
+    <a href="#">WELCOME</a>
+    <a href="login.html">LOGOUT</a>
+  </div>
+
+  <div class="icons-row">
+    <a href="#" class="icon-item">
+      <img src="imgi_2_RegistrationIcon.gif" alt="Course Registration">
+      <span>Course Registration</span>
+    </a>
+    <a href="#" class="icon-item">
+      <img src="imgi_3_profile.png" alt="My Profile">
+      <span>My Profile</span>
+    </a>
+    <a href="#" class="icon-item">
+      <img src="imgi_4_passport.png" alt="Upload Passport">
+      <span>Upload Passport</span>
+    </a>
+    <a href="#" class="icon-item">
+      <img src="imgi_5_sign.png" alt="Upload Signature">
+      <span>Upload Signature</span>
+    </a>
+    <a href="#" class="icon-item">
+      <img src="imgi_6_payment.png" alt="Fees (Payment/History)">
+      <span>Fees (Payment/History)</span>
+    </a>
+    <a href="#" class="icon-item">
+      <img src="imgi_7_print.png" alt="Print Receipt">
+      <span>Print Receipt</span>
+    </a>
+    <a href="#" class="icon-item">
+      <img src="imgi_8_security.png" alt="Security Settings">
+      <span>Security Settings</span>
+    </a>
+  </div>
+
+  <div class="main-content">
+    <fieldset class="student-brief">
+      <legend>Student Brief</legend>
+      <a href="#" class="change-pic">[Change Picture]</a>
+      <img src="imgi_9_pix_85435783BJ_BAKARE_DAVID.jpg" alt="Student Photo" class="student-photo">
+      <table class="info-table">
+        <tr><td>Name</td><td>BAKARE DAVID</td></tr>
+        <tr><td>Dept</td><td>CIVIL ENGINEERING</td></tr>
+        <tr><td>Programme</td><td>CIVIL ENGINEERING</td></tr>
+        <tr><td>Level</td><td>500</td></tr>
+        <tr>
+          <td>Oust. Fees</td>
+          <td>
+            <span class="oust-fees-msg">
+              NOTE: KINDLY PROCEED WITH FEE PAYMENT NOW. DISCREPANCY IN YOUR ACCOUNT? EMAIL US ON: studentaccount@run.edu.ng THANK YOU<br>
+              <span class="oust-fees-amount">N0.00</span>
+            </span>
+          </td>
+        </tr>
+        <tr><td>Prev Session Debt:</td><td>N0.00 (Included in Oustd)</td></tr>
+      </table>
+      <div class="links-list">
+        <a href="#">[Edit Info.]</a>
+        <a href="#">Upload Signature</a>
+        <a href="#">Course Evaluation</a>
+        <a href="#">GST Resources</a>
+        <a href="#">Project Supervision</a>
+        <a href="#">Exit Survey</a>
+      </div>
+      <button class="btn-small">Final Clearance</button>
+      <div class="room-alloc">
+        <a onclick="toggleRoomAlloc()" href="#">View Room Allocation</a>
+        <div class="room-alloc-popup" id="roomAllocText">
+          (Engineering Hostel, Block 30, room 3, 4, UB, Yes, No)
+        </div>
+      </div>
+      <div class="livechat-wrap">
+        <img src="imgi_10_livechat.jpg" alt="Live Chat">
+      </div>
+    </fieldset>
+
+    <div class="welcome-section">
+      <div class="welcome-title">Welcome</div>
+      <div class="student-name">BAKARE DAVID(RUN/CVE/21/10298)</div>
+      <div class="session-info">Current Session : <span>2025/2026</span></div>
+      <div class="session-info">Current Semester : <span>First</span></div>
+      <br><br>
+      <button class="exam-btn">Print Examination Clearance Here!</button>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span>@162.214.155.50</span>
+  <span>Copyright &copy; 2012 <a href="#">Redeemer's University</a>. All Rights Reserved.</span>
+</div>
+
+<script>
+  function toggleRoomAlloc() {
+    var el = document.getElementById('roomAllocText');
+    el.style.display = el.style.display === 'block' ? 'none' : 'block';
+  }
+</script>
+</body>
+</html>
+
+
+
